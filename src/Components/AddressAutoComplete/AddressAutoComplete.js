@@ -194,9 +194,13 @@ const AddressAutoComplete = ({
         type="text"
         name="address-auto-complete"
         id="address_auto_complete"
-        onChange={() =>
-          changeHandler(allowedCountries, seperatedAddress, onChange)
-        }
+        onChange={(e) => {
+          if (google_api_key.length)
+            changeHandler(allowedCountries, seperatedAddress, onChange);
+          else {
+            onChange({ address: e.target.value });
+          }
+        }}
         required={required}
         placeholder="Enter a Location"
         className={className}
