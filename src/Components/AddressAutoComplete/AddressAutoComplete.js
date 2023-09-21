@@ -184,18 +184,20 @@ const AddressAutoComplete = ({
 }) => {
   return (
     <>
-      <Script
-        url={`https://maps.googleapis.com/maps/api/js?key=${google_api_key}&libraries=places`}
-        onCreate={(e) => console.log(e, "value from on create")}
-        onError={(e) => console.log(e, "value from on error")}
-        onLoad={(e) => console.log(e, "value from on load")}
-      />
+      {google_api_key && (
+        <Script
+          url={`https://maps.googleapis.com/maps/api/js?key=${google_api_key}&libraries=places`}
+          onCreate={(e) => console.log(e, "value from on create")}
+          onError={(e) => console.log(e, "value from on error")}
+          onLoad={(e) => console.log(e, "value from on load")}
+        />
+      )}
       <TextField
         type="text"
         name="address-auto-complete"
         id="address_auto_complete"
         onChange={(e) => {
-          if (google_api_key.length)
+          if (google_api_key && google_api_key.length)
             changeHandler(allowedCountries, seperatedAddress, onChange);
           else {
             onChange({ address: e.target.value });
